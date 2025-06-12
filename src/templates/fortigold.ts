@@ -114,22 +114,37 @@ const createHeaderContainer = () => ({
   ]
 });
 
-const firstSectionContainer = {
-  id: generateId(),
-  type: 'container' as ElementType,
-  styles: {
-    backgroundColor: '#FFFFFF',
-    padding: '15px 30px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-  },
-  children: [
-  ]
-}
+const createFirstSectionContainer = () => {
+
+  return {
+    id: generateId(),
+    type: 'container' as ElementType,
+    styles: {
+      backgroundColor: '#00573F',
+      padding: '15px 30px',
+      display: 'flex',
+      "flex-direction": 'column',
+      gap: '32px',
+      alignItems: 'center',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    },
+    children: [
+      {
+        id: generateId(),
+        type: 'container' as ElementType,
+        styles: {
+          backgroudColor: '#ffffffff',
+          display: 'flex',
+        },
+        children: [
+
+        ]
+      }
+    ]
+  }
+};
 
 export const fortigoldTemplate = [
   createHeaderContainer(),
-  firstSectionContainer,
+  createFirstSectionContainer(),
 ]

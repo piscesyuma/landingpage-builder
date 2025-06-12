@@ -113,9 +113,10 @@ export const RegistrationForm: React.FC = () => {
                 <Input
                   id="businessName"
                   name="businessName"
-                  placeholder="e.g., Acme Corporation"
+                  placeholder="e.g., Orderific"
                   value={formData.businessName}
                   onChange={handleInputChange}
+                  className='!outline-none'
                   required
                 />
               </div>
@@ -124,7 +125,7 @@ export const RegistrationForm: React.FC = () => {
                 <select
                   id="industry"
                   name="industry"
-                  className="w-full p-2 border rounded-md"
+                  className="w-full p-2 border rounded-md outline-offset-4"
                   value={formData.industry}
                   onChange={handleInputChange}
                   required
@@ -296,9 +297,9 @@ export const RegistrationForm: React.FC = () => {
       >
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
-            Website Builder
+            Landing Page Builder
           </h1>
-          <p className="text-gray-600 mt-2">Create your professional website in minutes</p>
+          <p className="text-gray-600 mt-2">Create your professional landing page in minutes</p>
         </div>
         
         {renderStepIndicator()}

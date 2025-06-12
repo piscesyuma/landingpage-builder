@@ -325,7 +325,7 @@ export const getTemplateByIndustry = (industry: Industry, businessName: string, 
   // Customize based on industry
   switch (industry) {
     case 'fortigold' : {
-      baseTemplate.elements.splice(0, 1, ...fortigoldTemplate);
+      baseTemplate.elements.splice(0, 1, fortigoldTemplate.header, fortigoldTemplate.firstSection);
       return baseTemplate;
     }
     case 'restaurant': {

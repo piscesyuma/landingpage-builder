@@ -130,6 +130,7 @@ export const RegistrationForm: React.FC = () => {
                   onChange={handleInputChange}
                   required
                 >
+                  <option value="fortigold">FortiGold</option>
                   <option value="restaurant">Restaurant / Food Service</option>
                   <option value="retail">Retail / E-commerce</option>
                   <option value="professional">Professional Services</option>

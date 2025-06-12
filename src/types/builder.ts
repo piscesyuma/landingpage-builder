@@ -7,7 +7,7 @@ export type TextAlignment = 'left' | 'center' | 'right';
 
 export type BuilderStage = 'registration' | 'preview' | 'editor' | 'publish';
 
-export type Industry = 'restaurant' | 'retail' | 'professional' | 'technology' | 'healthcare' | 'fashion' | 'education' | 'other';
+export type Industry = 'fortigold' | 'restaurant' | 'retail' | 'professional' | 'technology' | 'healthcare' | 'fashion' | 'education' | 'other';
 
 export interface UserConfig {
   businessName: string;

@@ -1,6 +1,6 @@
 
 import { BuilderElement, ElementType, Industry, Template } from "@/types/builder";
-
+import { fortigoldTemplate } from "../templates/fortigold";
 // Generate unique IDs
 export const generateId = (): string => {
   return Math.random().toString(36).substr(2, 9);
@@ -324,6 +324,10 @@ export const getTemplateByIndustry = (industry: Industry, businessName: string, 
 
   // Customize based on industry
   switch (industry) {
+    case 'fortigold' : {
+      baseTemplate.elements.splice(0, 1, ...fortigoldTemplate);
+      return baseTemplate;
+    }
     case 'restaurant': {
       const heroContainer = {
         id: generateId(),

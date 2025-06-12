@@ -353,7 +353,7 @@ export const Canvas: React.FC = () => {
   };
 
   const viewModeClasses = {
-    desktop: 'w-full max-w-4xl mx-auto',
+    desktop: 'w-full mx-auto',
     tablet: 'w-[768px] mx-auto border-8 border-white rounded-xl',
     mobile: 'w-[375px] mx-auto border-8 border-white rounded-3xl shadow-lg'
   };

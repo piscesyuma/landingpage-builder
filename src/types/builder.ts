@@ -47,6 +47,8 @@ export interface BuilderElement {
     position?: string; // Added for positioning elements
     top?: string;
     left?: string;
+    bottom?: string;
+    right?: string;
     transform?: string;
     transition?: string;
     objectFit?: string; // Added for image sizing
@@ -57,6 +59,7 @@ export interface BuilderElement {
     marginRight?: string;
     justifyContent?: string; // Added for flex layouts
     alignItems?: string; // Added for flex layouts
+    zIndex?: string;
   };
   children?: BuilderElement[];
 }

@@ -181,18 +181,16 @@ const builderReducer = (state: BuilderState, action: BuilderAction): BuilderStat
     case 'REMOVE_ELEMENT': {
       const removeElementById = (elements: BuilderElement[]): BuilderElement[] => {
         return elements.filter(element => {
-          // Keep elements that don't match the ID
-          if (element.id !== action.payload) {
-            // If element has children, filter them recursively
-            if (element.children && element.children.length > 0) {
-              return {
-                ...element,
-                children: removeElementById(element.children)
-              };
-            }
-            return element;
+          if (element.id === action.payload) {
+            return false; // Remove the element with matching ID
           }
-          return false;
+          
+          // If element has children, process them recursively
+          if (element.children && element.children.length > 0) {
+            element.children = removeElementById(element.children);
+          }
+          
+          return true; // Keep the current element
         });
       };
       

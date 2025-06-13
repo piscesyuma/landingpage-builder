@@ -1095,7 +1095,7 @@ export const PropertyEditor: React.FC = () => {
               </div>
             </div>
           )}
-          <div className="space-y-2">
+          <div className="space-y-2 border-t border-gray-200 pt-4">
             <Label htmlFor="padding">Padding</Label>
             <Input
               id="padding"
@@ -1430,10 +1430,142 @@ export const PropertyEditor: React.FC = () => {
               </Button>
             </div>
           </div>
+
+          {properties.type === "container" && (
+            <>
+              <div className="border-t border-gray-200 my-4 pt-4">
+                <h3 className="text-sm font-medium mb-4">Positioning</h3>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="position">Position</Label>
+                  <select
+                    id="position"
+                    className="w-full p-2 border rounded-md bg-white"
+                    value={properties?.styles?.position || "static"}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      handleStyleChange("position", e.target.value);
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <option value="static">Static</option>
+                    <option value="relative">Relative</option>
+                    <option value="absolute">Absolute</option>
+                    <option value="fixed">Fixed</option>
+                    <option value="sticky">Sticky</option>
+                  </select>
+                </div>
+
+                {(properties?.styles?.position === "absolute" || 
+                  properties?.styles?.position === "fixed" || 
+                  properties?.styles?.position === "relative" || 
+                  properties?.styles?.position === "sticky") && (
+                  <div className="grid grid-cols-2 gap-4 mt-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="top">Top</Label>
+                      <Input
+                        id="top"
+                        value={properties?.styles?.top || ""}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          handleStyleChange("top", e.target.value);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        placeholder="e.g. 0px"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="right">Right</Label>
+                      <Input
+                        id="right"
+                        value={properties?.styles?.right || ""}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          handleStyleChange("right", e.target.value);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        placeholder="e.g. 0px"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="bottom">Bottom</Label>
+                      <Input
+                        id="bottom"
+                        value={properties?.styles?.bottom || ""}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          handleStyleChange("bottom", e.target.value);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        placeholder="e.g. 0px"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="left">Left</Label>
+                      <Input
+                        id="left"
+                        value={properties?.styles?.left || ""}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          handleStyleChange("left", e.target.value);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        placeholder="e.g. 0px"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-2 mt-4">
+                  <Label htmlFor="zIndex">Z-Index</Label>
+                  <Input
+                    id="zIndex"
+                    type="number"
+                    value={properties?.styles?.zIndex || ""}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      handleStyleChange("zIndex", e.target.value);
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                    placeholder="e.g. 1"
+                  />
+                  <div className="grid grid-cols-3 gap-2 mt-1">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-xs"
+                      onClick={() => handleStyleChange("zIndex", "0")}
+                    >
+                      Default
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-xs"
+                      onClick={() => handleStyleChange("zIndex", "10")}
+                    >
+                      Above
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-xs"
+                      onClick={() => handleStyleChange("zIndex", "-1")}
+                    >
+                      Below
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </TabsContent>
       </Tabs>
 
-      <div className="mt-6">
+      <div className="mt-6 sticky bottom-0 drop-shadow-lg shadow-md">
         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           <Button
             className="w-full bg-gradient-to-r from-builder-primary to-purple-600 hover:from-builder-primary-hover hover:to-purple-700 text-white"

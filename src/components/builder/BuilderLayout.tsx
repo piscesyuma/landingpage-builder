@@ -1,4 +1,3 @@
-
 import { ElementsPanel } from "./ElementsPanel";
 import { PropertyEditor } from "./PropertyEditor";
 import { Canvas } from "./Canvas";
@@ -11,6 +10,10 @@ import { RegistrationForm } from "./RegistrationForm";
 import { TemplatePreview } from "./TemplatePreview";
 import { PublishView } from "./PublishView";
 import { useEffect } from "react";
+
+interface BuilderLayoutProps {
+  landingPageID: string;
+}
 
 // Main content component to handle different stages
 const BuilderContent: React.FC = () => {
@@ -87,7 +90,7 @@ const BuilderContent: React.FC = () => {
 };
 
 // Wrapper with provider
-export const BuilderLayout: React.FC = () => {
+export const BuilderLayout: React.FC<BuilderLayoutProps> = ({ landingPageID }) => {
   return (
     <BuilderProvider>
       <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 to-indigo-50">

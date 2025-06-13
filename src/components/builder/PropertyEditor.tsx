@@ -850,7 +850,252 @@ export const PropertyEditor: React.FC = () => {
         </TabsContent>
 
         <TabsContent value="layout" className="space-y-4">
-          <div className="space-y-2">
+          {properties.type === "container" && (
+            <div className="space-y-2">
+              <Label htmlFor="display">Display</Label>
+              <select
+                id="display"
+                className="w-full p-2 border rounded-md bg-white"
+                value={properties?.styles?.display || ""}
+                onChange={(e)=>{
+                  e.stopPropagation();
+                  handleStyleChange("display", e.target.value)
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <option value="block">block</option>
+                <option value="inline-block">inline-block</option>
+                <option value="none">none</option>
+                <option value="flex">flex</option>
+                <option value="grid">grid</option>
+              </select>
+            </div>
+            
+          )}
+          { properties?.styles?.display === 'flex' && (
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="flexDirection">Flex Direction</Label>
+                <select
+                  id="flexDirection"
+                  className="w-full p-2 border rounded-md bg-white"
+                  value={properties?.styles?.flexDirection || ""}
+                  onChange={(e)=>{
+                    e.stopPropagation();
+                    handleStyleChange("flexDirection", e.target.value)
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <option value="row">Row</option>
+                  <option value="column">Column</option>
+                  <option value="row-reverse">Row Reverse</option>
+                  <option value="column-reverse">Column Reverse</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="justifyContent">Justify Content</Label>
+                <select
+                  id="justifyContent"
+                  className="w-full p-2 border rounded-md bg-white"
+                  value={properties?.styles?.justifyContent || ""}
+                  onChange={(e)=>{
+                    e.stopPropagation();
+                    handleStyleChange("justifyContent", e.target.value)
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <option value="flex-start">Start</option>
+                  <option value="center">Center</option>
+                  <option value="flex-end">End</option>
+                  <option value="space-between">Space Between</option>
+                  <option value="space-around">Space Around</option>
+                  <option value="space-evenly">Space Evenly</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="alignItems">Align Items</Label>
+                <select
+                  id="alignItems"
+                  className="w-full p-2 border rounded-md bg-white"
+                  value={properties?.styles?.alignItems || ""}
+                  onChange={(e)=>{
+                    e.stopPropagation();
+                    handleStyleChange("alignItems", e.target.value)
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <option value="flex-start">Start</option>
+                  <option value="center">Center</option>
+                  <option value="flex-end">End</option>
+                  <option value="stretch">Stretch</option>
+                  <option value="baseline">Baseline</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="flexWrap">Flex Wrap</Label>
+                <select
+                  id="flexWrap"
+                  className="w-full p-2 border rounded-md bg-white"
+                  value={properties?.styles?.flexWrap || ""}
+                  onChange={(e)=>{
+                    e.stopPropagation();
+                    handleStyleChange("flexWrap", e.target.value)
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <option value="nowrap">No Wrap</option>
+                  <option value="wrap">Wrap</option>
+                  <option value="wrap-reverse">Wrap Reverse</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="gap">Gap</Label>
+                <Input
+                  id="gap"
+                  value={properties?.styles?.gap || ""}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    handleStyleChange("gap", e.target.value);
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  placeholder="e.g. 10px"
+                />
+                <div className="grid grid-cols-3 gap-2 mt-1">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-xs"
+                    onClick={() => handleStyleChange("gap", "0px")}
+                  >
+                    None
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-xs"
+                    onClick={() => handleStyleChange("gap", "10px")}
+                  >
+                    Small
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-xs"
+                    onClick={() => handleStyleChange("gap", "20px")}
+                  >
+                    Large
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+          { properties?.styles?.display === 'grid' && (
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="gridTemplateColumns">Grid Template Columns</Label>
+                <Input
+                  id="gridTemplateColumns"
+                  value={properties?.styles?.gridTemplateColumns || ""}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    handleStyleChange("gridTemplateColumns", e.target.value);
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  placeholder="e.g. 1fr 1fr 1fr"
+                />
+                <div className="grid grid-cols-3 gap-2 mt-1">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-xs"
+                    onClick={() => handleStyleChange("gridTemplateColumns", "1fr")}
+                  >
+                    Single
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-xs"
+                    onClick={() => handleStyleChange("gridTemplateColumns", "1fr 1fr")}
+                  >
+                    Two
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-xs"
+                    onClick={() => handleStyleChange("gridTemplateColumns", "1fr 1fr 1fr")}
+                  >
+                    Three
+                  </Button>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="gridGap">Grid Gap</Label>
+                <Input
+                  id="gridGap"
+                  value={properties?.styles?.gap || ""}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    handleStyleChange("gap", e.target.value);
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  placeholder="e.g. 10px"
+                />
+                <div className="grid grid-cols-3 gap-2 mt-1">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-xs"
+                    onClick={() => handleStyleChange("gap", "0px")}
+                  >
+                    None
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-xs"
+                    onClick={() => handleStyleChange("gap", "10px")}
+                  >
+                    Small
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-xs"
+                    onClick={() => handleStyleChange("gap", "20px")}
+                  >
+                    Large
+                  </Button>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="gridAlign">Grid Alignment</Label>
+                <select
+                  id="gridAlign"
+                  className="w-full p-2 border rounded-md bg-white"
+                  value={properties?.styles?.alignItems || ""}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    handleStyleChange("alignItems", e.target.value);
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <option value="stretch">Stretch</option>
+                  <option value="start">Start</option>
+                  <option value="center">Center</option>
+                  <option value="end">End</option>
+                </select>
+              </div>
+            </div>
+          )}
+          <div className="space-y-2 border-t border-gray-200 pt-4">
             <Label htmlFor="padding">Padding</Label>
             <Input
               id="padding"
@@ -950,7 +1195,7 @@ export const PropertyEditor: React.FC = () => {
             <Label htmlFor="width">Width</Label>
             <Input
               id="width"
-              value={properties?.styles?.margin || ""}
+              value={properties?.styles?.width || ""}
               onChange={(e) => {
                 e.stopPropagation();
                 handleStyleChange("width", e.target.value);
@@ -990,7 +1235,7 @@ export const PropertyEditor: React.FC = () => {
             <Label htmlFor="height">Height</Label>
             <Input
               id="height"
-              value={properties?.styles?.margin || ""}
+              value={properties?.styles?.height || ""}
               onChange={(e) => {
                 e.stopPropagation();
                 handleStyleChange("height", e.target.value);
@@ -1025,10 +1270,302 @@ export const PropertyEditor: React.FC = () => {
               </Button>
             </div>
           </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="maxWidth">Max Width</Label>
+            <Input
+              id="maxWidth"
+              value={properties?.styles?.maxWidth || ""}
+              onChange={(e) => {
+                e.stopPropagation();
+                handleStyleChange("maxWidth", e.target.value);
+              }}
+              onClick={(e) => e.stopPropagation()}
+              placeholder="e.g. 100% or 1200px"
+            />
+            <div className="grid grid-cols-3 gap-2 mt-1">
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("maxWidth", "100%")}
+              >
+                Full
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("maxWidth", "1200px")}
+              >
+                Large
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("maxWidth", "none")}
+              >
+                None
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="minWidth">Min Width</Label>
+            <Input
+              id="minWidth"
+              value={properties?.styles?.minWidth || ""}
+              onChange={(e) => {
+                e.stopPropagation();
+                handleStyleChange("minWidth", e.target.value);
+              }}
+              onClick={(e) => e.stopPropagation()}
+              placeholder="e.g. 200px"
+            />
+            <div className="grid grid-cols-3 gap-2 mt-1">
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("minWidth", "200px")}
+              >
+                Small
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("minWidth", "400px")}
+              >
+                Medium
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("minWidth", "none")}
+              >
+                None
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="maxHeight">Max Height</Label>
+            <Input
+              id="maxHeight"
+              value={properties?.styles?.maxHeight || ""}
+              onChange={(e) => {
+                e.stopPropagation();
+                handleStyleChange("maxHeight", e.target.value);
+              }}
+              onClick={(e) => e.stopPropagation()}
+              placeholder="e.g. 100vh or 800px"
+            />
+            <div className="grid grid-cols-3 gap-2 mt-1">
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("maxHeight", "100vh")}
+              >
+                Full
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("maxHeight", "800px")}
+              >
+                Large
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("maxHeight", "none")}
+              >
+                None
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="minHeight">Min Height</Label>
+            <Input
+              id="minHeight"
+              value={properties?.styles?.minHeight || ""}
+              onChange={(e) => {
+                e.stopPropagation();
+                handleStyleChange("minHeight", e.target.value);
+              }}
+              onClick={(e) => e.stopPropagation()}
+              placeholder="e.g. 200px"
+            />
+            <div className="grid grid-cols-3 gap-2 mt-1">
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("minHeight", "200px")}
+              >
+                Small
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("minHeight", "400px")}
+              >
+                Medium
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => handleStyleChange("minHeight", "none")}
+              >
+                None
+              </Button>
+            </div>
+          </div>
+
+          {properties.type === "container" && (
+            <>
+              <div className="border-t border-gray-200 my-4 pt-4">
+                <h3 className="text-sm font-medium mb-4">Positioning</h3>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="position">Position</Label>
+                  <select
+                    id="position"
+                    className="w-full p-2 border rounded-md bg-white"
+                    value={properties?.styles?.position || "static"}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      handleStyleChange("position", e.target.value);
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <option value="static">Static</option>
+                    <option value="relative">Relative</option>
+                    <option value="absolute">Absolute</option>
+                    <option value="fixed">Fixed</option>
+                    <option value="sticky">Sticky</option>
+                  </select>
+                </div>
+
+                {(properties?.styles?.position === "absolute" || 
+                  properties?.styles?.position === "fixed" || 
+                  properties?.styles?.position === "relative" || 
+                  properties?.styles?.position === "sticky") && (
+                  <div className="grid grid-cols-2 gap-4 mt-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="top">Top</Label>
+                      <Input
+                        id="top"
+                        value={properties?.styles?.top || ""}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          handleStyleChange("top", e.target.value);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        placeholder="e.g. 0px"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="right">Right</Label>
+                      <Input
+                        id="right"
+                        value={properties?.styles?.right || ""}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          handleStyleChange("right", e.target.value);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        placeholder="e.g. 0px"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="bottom">Bottom</Label>
+                      <Input
+                        id="bottom"
+                        value={properties?.styles?.bottom || ""}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          handleStyleChange("bottom", e.target.value);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        placeholder="e.g. 0px"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="left">Left</Label>
+                      <Input
+                        id="left"
+                        value={properties?.styles?.left || ""}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          handleStyleChange("left", e.target.value);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        placeholder="e.g. 0px"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-2 mt-4">
+                  <Label htmlFor="zIndex">Z-Index</Label>
+                  <Input
+                    id="zIndex"
+                    type="number"
+                    value={properties?.styles?.zIndex || ""}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      handleStyleChange("zIndex", e.target.value);
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                    placeholder="e.g. 1"
+                  />
+                  <div className="grid grid-cols-3 gap-2 mt-1">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-xs"
+                      onClick={() => handleStyleChange("zIndex", "0")}
+                    >
+                      Default
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-xs"
+                      onClick={() => handleStyleChange("zIndex", "10")}
+                    >
+                      Above
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-xs"
+                      onClick={() => handleStyleChange("zIndex", "-1")}
+                    >
+                      Below
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </TabsContent>
       </Tabs>
 
-      <div className="mt-6">
+      <div className="mt-6 sticky bottom-0 drop-shadow-lg shadow-md">
         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           <Button
             className="w-full bg-gradient-to-r from-builder-primary to-purple-600 hover:from-builder-primary-hover hover:to-purple-700 text-white"

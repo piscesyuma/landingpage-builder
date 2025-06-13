@@ -181,20 +181,20 @@ const builderReducer = (state: BuilderState, action: BuilderAction): BuilderStat
     case 'REMOVE_ELEMENT': {
       const removeElementById = (elements: BuilderElement[]): BuilderElement[] => {
         return elements.filter(element => {
-          // Keep elements that don't match the ID
-          if (element.id !== action.payload) {
-            // If element has children, filter them recursively
-            if (element.children && element.children.length > 0) {
-              return {
-                ...element,
-                children: removeElementById(element.children)
-              };
-            }
-            return element;
+          if (element.id === action.payload) {
+            return false;
           }
-          return false;
+          
+          if (element.children && element.children.length > 0) {
+            element.children = removeElementById(element.children);
+          }
+          
+          return true;
         });
       };
+      
+      // Create a deep clone of the current template state
+      const currentTemplate = JSON.parse(JSON.stringify(state.template));
       
       const updatedElements = removeElementById(state.template.elements);
       
@@ -208,7 +208,7 @@ const builderReducer = (state: BuilderState, action: BuilderAction): BuilderStat
         template: updatedTemplate,
         selectedElementId: null,
         history: {
-          past: [...state.history.past, state.template],
+          past: [...state.history.past, currentTemplate],
           future: []
         }
       };
@@ -223,11 +223,12 @@ const builderReducer = (state: BuilderState, action: BuilderAction): BuilderStat
       
       return {
         ...state,
-        template: previous,
+        template: {...{...previous}},
         history: {
           past: newPast,
           future: [state.template, ...future]
-        }
+        },
+        selectedElementId: null
       };
     }
     
@@ -244,7 +245,8 @@ const builderReducer = (state: BuilderState, action: BuilderAction): BuilderStat
         history: {
           past: [...past, state.template],
           future: newFuture
-        }
+        },
+        selectedElementId: null
       };
     }
     

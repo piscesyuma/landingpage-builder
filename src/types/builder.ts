@@ -33,11 +33,15 @@ export interface BuilderElement {
     margin?: string;
     borderRadius?: string;
     width?: string;
+    minWidth?: string;
     height?: string;
+    minHeight?: string;
     boxShadow?: string;
     border?: string;
     fontFamily?: string;
     display?: string; // Added display property
+    flexDirection?: string; 
+    flexWrap?: string;
     gridTemplateColumns?: string; // Added for gallery layout
     gap?: string; // Added for spacing in layouts
     position?: string; // Added for positioning elements
@@ -48,6 +52,7 @@ export interface BuilderElement {
     objectFit?: string; // Added for image sizing
     cursor?: string; // Added for cursor styling
     maxWidth?: string; // Added for limiting widths
+    maxHeight?: string; // Added for limiting Heights
     marginLeft?: string; // Added for specific margin directions
     marginRight?: string;
     justifyContent?: string; // Added for flex layouts

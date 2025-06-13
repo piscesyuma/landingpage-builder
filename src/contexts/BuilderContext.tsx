@@ -182,17 +182,19 @@ const builderReducer = (state: BuilderState, action: BuilderAction): BuilderStat
       const removeElementById = (elements: BuilderElement[]): BuilderElement[] => {
         return elements.filter(element => {
           if (element.id === action.payload) {
-            return false; // Remove the element with matching ID
+            return false;
           }
           
-          // If element has children, process them recursively
           if (element.children && element.children.length > 0) {
             element.children = removeElementById(element.children);
           }
           
-          return true; // Keep the current element
+          return true;
         });
       };
+      
+      // Create a deep clone of the current template state
+      const currentTemplate = JSON.parse(JSON.stringify(state.template));
       
       const updatedElements = removeElementById(state.template.elements);
       
@@ -206,7 +208,7 @@ const builderReducer = (state: BuilderState, action: BuilderAction): BuilderStat
         template: updatedTemplate,
         selectedElementId: null,
         history: {
-          past: [...state.history.past, state.template],
+          past: [...state.history.past, currentTemplate],
           future: []
         }
       };
@@ -221,11 +223,12 @@ const builderReducer = (state: BuilderState, action: BuilderAction): BuilderStat
       
       return {
         ...state,
-        template: previous,
+        template: {...{...previous}},
         history: {
           past: newPast,
           future: [state.template, ...future]
-        }
+        },
+        selectedElementId: null
       };
     }
     
@@ -242,7 +245,8 @@ const builderReducer = (state: BuilderState, action: BuilderAction): BuilderStat
         history: {
           past: [...past, state.template],
           future: newFuture
-        }
+        },
+        selectedElementId: null
       };
     }
     
